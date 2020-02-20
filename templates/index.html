@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Recipe to Grocery List</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<div class="jumbotron text-center text-light" style="margin-bottom:0;background-color:rgb(0, 230, 138);">
-	<h1>Recipe to Grocery List</h1>
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Recipe to Grocery List{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="jumbotron text-center text-light" style="margin-bottom:0;background-color:rgb(0, 230, 138);">
+		<h1>Recipe to Grocery List</h1>
 	</div>
-</body>
-</html>
+</div>
+{% endblock %}
