@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from django.views.decorators.http import require_http_methods
 import requests
 
 # Create your views here.
@@ -12,6 +13,7 @@ def home_view(request, *args, **kwargs):
 
 	return render(request, "index.html", {'data':data})
 
+@require_http_methods(["GET", "POST"])
 def register_user(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
