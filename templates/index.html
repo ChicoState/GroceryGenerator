@@ -21,8 +21,39 @@
 		  <div class="card">
 		    <img class="card-img-top" src={{recipe.image}} alt="Card image cap">
 		    <div class="card-body">
-		      <h5 class="card-title"><a href={{recipe.sourceUrl}}>{{recipe.title}}</a></h5>
-		      <a class="btn btn-dark" href="add_to_favorties/{{recipe.id}}">Add to Favorites</a>
+		      	<h5 class="card-title"><a href={{recipe.sourceUrl}}>{{recipe.title}}</a></h5>
+		      	<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recipeModal_{{recipe.id}}">
+				  View Recipe
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="recipeModal_{{recipe.id}}" tabindex="-1" role="dialog" aria-labelledby="recipeModalLabel_{{recipe.id}}" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="recipeModalLabel_{{recipe.id}}">{{recipe.title}}</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <ul>
+				        	{% for item in recipe.extendedIngredients %}
+				        	<li>{{item.original}}</li>
+				        	{% endfor %}
+				        </ul>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <a class="btn btn-dark" href="recipe/{{recipe.id}}">View Full Recipe</a>
+				        <form action="favorites/add/{{recipe.id}}" method="POST">
+						  <input class="btn btn-dark" type="submit" value="Add to Favorites">
+						</form>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 		    </div>
 		  </div>
 		{% endfor %}
