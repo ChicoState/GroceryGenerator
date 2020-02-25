@@ -22,7 +22,6 @@
 		    <img class="card-img-top" src={{recipe.image}} alt="Card image cap">
 		    <div class="card-body">
 		      	<h5 class="card-title"><a href={{recipe.sourceUrl}}>{{recipe.title}}</a></h5>
-		      	<a class="btn btn-dark" href="favorites/add/{{recipe.id}}">Add to Favorites</a>
 		      	<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recipeModal_{{recipe.id}}">
 				  View Recipe
@@ -47,7 +46,10 @@
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        <a class="btn btn-dark" href="recipe/{{recipe.id}}">View Full Recipe</a>
+				        <form action="favorites/add/{{recipe.id}}" method="POST">
+						  <input class="btn btn-dark" type="submit" value="Add to Favorites">
+						</form>
 				      </div>
 				    </div>
 				  </div>
