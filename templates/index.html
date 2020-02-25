@@ -1,16 +1,16 @@
 <!-- templates/index.html -->
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Recipe to Grocery List{% endblock %}
 
 
 {% block content %}
 {% include "nav.html" %}
 <div class="container-fluid">
-    <div class="jumbotron text-center text-light" style="margin-bottom:0;background-color:rgb(0, 230, 138);">
-		<h1>Recipe to Grocery List</h1>
+    <div class="jumbotron text-center text-light" style="margin-bottom:0;background-image:url('{% static "images/grocery_banner.jpg" %}');">
+		<h1><span style="background-color:#00e68a">Recipe to Grocery List</span></h1>
 		{% if user.is_authenticated %}
-      		<h2>Welcome {{ user.get_username }}</h2>
+      		<h2><span style="background-color:#00e68a">Welcome {{ user.get_username }}</span></h2>
       	{% else %}
       		<a class="btn btn-dark" href="accounts/register/">Register</a>
       	{% endif %}
