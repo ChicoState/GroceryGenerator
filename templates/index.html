@@ -5,20 +5,22 @@
 
 
 {% block content %}
-{% include "nav.html" %}
-<div class="container-fluid">
-    <div class="jumbotron text-center text-light" style="margin-bottom:0;background-image:url('{% static "images/grocery_banner.jpg" %}');">
-		<h1><span style="background-color:#00e68a">Recipe to Grocery List</span></h1>
+
+    <div id="banner" class="jumbotron text-center text-light">
+		<h1>Recipe to Grocery List</h1>
 		{% if user.is_authenticated %}
-      		<h2><span style="background-color:#00e68a">Welcome {{ user.get_username }}</span></h2>
+      		<h2>Welcome {{ user.get_username }}</h2>
       	{% else %}
       		<a class="btn btn-dark" href="accounts/register/">Register</a>
       	{% endif %}
 	</div>
+	
+	{% include "nav.html" %}
+<div class="container-fluid">
 	<div>
 		<div class="card-columns">
 		{% for recipe in data.recipes %}
-		  <div class="card">
+		  <div id="recipe-card" class="card">
 		    <img class="card-img-top" src={{recipe.image}} alt="Card image cap">
 		    <div class="card-body">
 		      	<h5 class="card-title"><a href={{recipe.sourceUrl}}>{{recipe.title}}</a></h5>
