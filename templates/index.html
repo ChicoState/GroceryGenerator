@@ -28,7 +28,6 @@
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recipeModal_{{recipe.id}}">
 				  View Recipe
 				</button>
-
 				<!-- Modal -->
 				<div class="modal fade" id="recipeModal_{{recipe.id}}" tabindex="-1" role="dialog" aria-labelledby="recipeModalLabel_{{recipe.id}}" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
@@ -42,9 +41,12 @@
 				      <div class="modal-body">
 				        <ul>
 				        	{% for item in recipe.extendedIngredients %}
-				        	<li>{{item.original}}</li>
+				        		<li>{{item.original}}</li>
 				        	{% endfor %}
 				        </ul>
+				        {% if recipe.id.readyInMinutes != 45 %} <!-- need to make this not show a time if recipe doesn't include one -->
+				        	<ul> Ready in {{recipe.readyInMinutes}} minutes</ul>
+				        {% endif %}
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
