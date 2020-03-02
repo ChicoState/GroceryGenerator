@@ -1,0 +1,9 @@
+#banner {
+	margin-bottom: 0;
+	background-image: url('../images/grocery_banner.jpg');
+}
+
+#recipe-card {
+	box-shadow: rgb(0, 0, 0) 0px 10px 13px -8px ;
+	margin-top: 10px;
+}

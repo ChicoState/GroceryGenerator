@@ -5,20 +5,22 @@
 
 
 {% block content %}
-{% include "nav.html" %}
-<div class="container-fluid">
-    <div class="jumbotron text-center text-light" style="margin-bottom:0;background-image:url('{% static "images/grocery_banner.jpg" %}');">
-		<h1><span style="background-color:#00e68a">Recipe to Grocery List</span></h1>
+
+    <div id="banner" class="jumbotron text-center text-light">
+		<h1>Recipe to Grocery List</h1>
 		{% if user.is_authenticated %}
-      		<h2><span style="background-color:#00e68a">Welcome {{ user.get_username }}</span></h2>
+      		<h2>Welcome {{ user.get_username }}</h2>
       	{% else %}
       		<a class="btn btn-dark" href="accounts/register/">Register</a>
       	{% endif %}
 	</div>
+	
+	{% include "nav.html" %}
+<div class="container-fluid">
 	<div>
 		<div class="card-columns">
 		{% for recipe in data.recipes %}
-		  <div class="card">
+		  <div id="recipe-card" class="card">
 		    <img class="card-img-top" src={{recipe.image}} alt="Card image cap">
 		    <div class="card-body">
 		      	<h5 class="card-title"><a href={{recipe.sourceUrl}}>{{recipe.title}}</a></h5>
@@ -26,7 +28,6 @@
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recipeModal_{{recipe.id}}">
 				  View Recipe
 				</button>
-
 				<!-- Modal -->
 				<div class="modal fade" id="recipeModal_{{recipe.id}}" tabindex="-1" role="dialog" aria-labelledby="recipeModalLabel_{{recipe.id}}" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
@@ -40,9 +41,12 @@
 				      <div class="modal-body">
 				        <ul>
 				        	{% for item in recipe.extendedIngredients %}
-				        	<li>{{item.original}}</li>
+				        		<li>{{item.original}}</li>
 				        	{% endfor %}
 				        </ul>
+				        {% if recipe.id.readyInMinutes != 45 %} <!-- need to make this not show a time if recipe doesn't include one -->
+				        	<ul> Ready in {{recipe.readyInMinutes}} minutes</ul>
+				        {% endif %}
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
