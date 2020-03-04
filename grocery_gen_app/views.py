@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.views.decorators.http import require_http_methods
 import requests
+from urllib.parse import quote
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -26,3 +27,13 @@ def register_user(request):
 			return redirect('/')
 	form = UserCreationForm();
 	return render(request, "registration/register.html", {'form': form})
+
+def search(request):
+	param = "tofu"
+	url = "https://api.spoonacular.com/recipes/search?apiKey=caced314aa254583a7713a5e8e77f883&query=" + param + "&number=5"
+	response = requests.request("GET", url)
+	data = response.json()
+	context = {
+		'data' : data
+	}
+	return render(request, "search.html", context)
