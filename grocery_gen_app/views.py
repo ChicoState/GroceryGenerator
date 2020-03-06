@@ -16,8 +16,18 @@ def home_view(request, *args, **kwargs):
 
 
 def recipe_view(request, recipe_id):
+
+	print ("In recipe view for recipe_id", recipe_id)
 	
-   return render(request, "recipe.html/", {'recipe_id': recipe_id})
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
+	
+	response = requests.request("GET", url)
+	data = response.json()
+	# print ("data for recipe")
+	# print (data)
+
+	return render(request, "recipe.html", {'data': data})
+	# return render(request, "recipe.html/", {'recipe_id': recipe_id})
 
 
 
