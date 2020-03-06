@@ -2,16 +2,24 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
 import requests
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
 	
-	url = "https://api.spoonacular.com/recipes/random?number=5&apiKey=caced314aa254583a7713a5e8e77f883"
+	url = "https://api.spoonacular.com/recipes/random?number=6&apiKey=caced314aa254583a7713a5e8e77f883"
 	response = requests.request("GET", url)
 	data = response.json()
 
 	return render(request, "index.html", {'data':data})
+
+
+def recipe_view(request, recipe_id):
+	
+   return render(request, "recipe.html/", {'recipe_id': recipe_id})
+
+
 
 @require_http_methods(["GET", "POST"])
 def register_user(request):

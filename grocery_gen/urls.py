@@ -20,6 +20,7 @@ from grocery_gen_app.views import *
 urlpatterns = [
 	path('', home_view, name='home'),
     path('admin/', admin.site.urls),
+    path('recipe/<int:recipe_id>/', recipe_view, name='recipe'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register_user, name='register'),
 ]
