@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand navbar-light" style="background-color: #99f5d0">
+<nav id="navigation" class="navbar navbar-expand navbar-light sticky-top" style="background-color: #99f5d0">
   
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home</a>
+      <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
       <a class="nav-item nav-link" href="#">Features</a>
       {% if user.is_authenticated %}
         <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
@@ -43,3 +43,4 @@
 </svg></button>
   </form>
 </nav>
+
