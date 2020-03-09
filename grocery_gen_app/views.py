@@ -26,9 +26,9 @@ def recipe_view(request, recipe_id):
 	# print ("data for recipe")
 	# print (data)
 
-	return render(request, "recipe.html", {'data': data})
 	# return render(request, "recipe.html/", {'recipe_id': recipe_id})
 
+	return render(request, "recipe.html", {'data': data})
 
 
 @require_http_methods(["GET", "POST"])
