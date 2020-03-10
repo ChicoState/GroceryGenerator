@@ -1,21 +1,43 @@
-<!-- templates/registration/login.html -->
+<!-- templates/recipe.html -->
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Recipe{% endblock %}
 
+
 {% block content %}
-{% include "nav.html" %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3">
 
-        </div>
-        <div class="col-6">    
-            {{data}}
-        </div>
-        <div class="col-3">
+    <div id="banner" class="jumbotron text-center text-light">
+		<h1>Recipe to Grocery List</h1>
+		{% if user.is_authenticated %}
+      		<h2>Welcome {{ user.get_username }}</h2>
+      	{% else %}
+      		<a class="btn btn-dark" href="accounts/register/">Register</a>
+      	{% endif %}
+	</div>
+	
+	{% include "nav.html" %}
 
-        </div>
-    </div>
-</div>
+<br>
+
+<h2>{{data.title}}</h2>
+<img src="{{data.image}}" style="float:right">
+<a class="btn btn-dark" href="#">Add to Favorites</a>
+<br></br>
+
+<div>Serves {{data.servings}} people</div>
+<div>Total time: {{data.readyInMinutes}} minutes</div>
+<br>
+{% for item in data.extendedIngredients %}
+	<li>{{item.original}}</li>
+{% endfor %}
+<br>
+<h3>Instructions:</h3>
+<p>{{data.instructions}}</p>
+<br>
+<h3>Additional Information:</h3>
+<li> vegetarian: {{data.vegetarian}}</li>
+<li> Vegan: {{data.vegan}}</li>
+<li> Gluten free: {{data.glutenFree}}</li>
+<li> Dairy free: {{data.dairyFree}}</li>
+
 {% endblock %}
