@@ -23,4 +23,5 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/', recipe_view, name='recipe'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register_user, name='register'),
+    path('search/', search, name='search'),
 ]
