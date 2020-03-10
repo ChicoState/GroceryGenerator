@@ -5,7 +5,7 @@
 
 
 {% block content %}
-
+{% include "nav.html" %}
     <div id="banner" class="jumbotron text-center text-light">
 		<h1>Recipe to Grocery List</h1>
 		{% if user.is_authenticated %}
@@ -15,8 +15,7 @@
       	{% endif %}
 	</div>
 	
-	{% include "nav.html" %}
-<div id="page" class="container-fluid">
+<div class="container-fluid">
 	<div>
 		<div class="card-columns">
 		{% for recipe in data.recipes %}
