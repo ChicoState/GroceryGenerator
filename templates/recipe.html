@@ -7,7 +7,7 @@
 {% block content %}
 
     <div id="banner" class="jumbotron text-center text-light">
-		<h1>Recipe to Grocery List</h1>
+		<h1 id="jumboHeader">EasyEats</h1>
 		{% if user.is_authenticated %}
       		<h2>Welcome {{ user.get_username }}</h2>
       	{% else %}
@@ -17,10 +17,11 @@
 	
 	{% include "nav.html" %}
 
-<br>
 
+<div id="page">
+<div id="recipePage">
 <h2>{{data.title}}</h2>
-<img src="{{data.image}}" style="float:right">
+<img id="recipeImage" src="{{data.image}}">
 <a class="btn btn-dark" href="#">Add to Favorites</a>
 <br></br>
 
@@ -32,12 +33,21 @@
 {% endfor %}
 <br>
 <h3>Instructions:</h3>
-<p>{{data.instructions}}</p>
+<div>{{data.instructions}}</div>
 <br>
-<h3>Additional Information:</h3>
-<li> vegetarian: {{data.vegetarian}}</li>
-<li> Vegan: {{data.vegan}}</li>
-<li> Gluten free: {{data.glutenFree}}</li>
-<li> Dairy free: {{data.dairyFree}}</li>
-
+<h3>Dietary Information:</h3>
+{% if data.vegetarian %}
+	<li>Vegetarian</li>
+{% endif %}
+{% if data.vegan %}
+	<li>Vegan</li>
+{% endif %}
+{% if data.glutenFree %}
+	<li>Gluten Free</li>
+{% endif %}
+{% if data.dairyFree %}
+	<li>Dairy Free</li>
+{% endif %}
+</div>
+</div>
 {% endblock %}
