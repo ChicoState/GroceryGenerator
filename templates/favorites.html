@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Recipe{% endblock %}
+
+
+{% block content %}
+
+    <div id="banner" class="jumbotron text-center text-light">
+		<h1>Recipe to Grocery List</h1>
+		{% if user.is_authenticated %}
+      		<h2>Welcome {{ user.get_username }}</h2>
+      	{% else %}
+      		<a class="btn btn-dark" href="accounts/register/">Register</a>
+      	{% endif %}
+	</div>
+	
+	{% include "nav.html" %}
+
+<br>
+<h1>{{ user.get_username }}'s favorite recipes:</h1>
+
+{% endblock %}
+
+
+hi
