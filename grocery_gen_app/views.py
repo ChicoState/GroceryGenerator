@@ -18,20 +18,7 @@ def home_view(request, *args, **kwargs):
 	return render(request, "index.html", {'data':data})
 
 
-def recipe_view(request, recipe_id):
 
-	print ("In recipe view for recipe_id", recipe_id)
-	
-	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
-	
-	response = requests.request("GET", url)
-	data = response.json()
-	# print ("data for recipe")
-	# print (data)
-
-	# return render(request, "recipe.html/", {'recipe_id': recipe_id})
-
-	return render(request, "recipe.html", {'data': data})
 
 
 @require_http_methods(["GET", "POST"])
@@ -58,21 +45,27 @@ def search(request):
 	}
 	return render(request, "search.html", context)
 
+def recipe_view(request, recipe_id):
+	
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
+	
+	response = requests.request("GET", url)
+	data = response.json()
 
-def favorites_view(request):
+	return render(request, "recipe.html", {'data': data})
 
-	# print ("In recipe view for favorites")
 
-	return render(request, "favorites.html")
+
+def favorites_view(request, recipe_id):
 
 	
-	# url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
 	
-	# response = requests.request("GET", url)
-	# data = response.json()
+	response = requests.request("GET", url)
+	data = response.json()
 	# print ("data for recipe")
 	# print (data)
 
 
-	# return render(request, "favorites.html", {'data': data})
+	return render(request, "favorites.html", {'data': data})
 
