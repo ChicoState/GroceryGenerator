@@ -1,0 +1,28 @@
+<!-- templates/create_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Recipe{% endblock %}
+
+{% block content %}
+{% include "nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-6">    
+            <form class="mt-5" action="/create_list/" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="list_name">New List Name</label>
+                <input class="form-control" id="list_name_input" placeholder="Enter List Name" name="list_name">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

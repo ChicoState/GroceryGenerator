@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 import requests
 from urllib.parse import quote
+from .models import user_lists
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -36,7 +37,8 @@ def register_user(request):
 	return render(request, "registration/register.html", {'form': form})
 
 def search(request):
-	param = "tofu"
+	term = request.POST['term']
+	param = quote(term)
 	url = "https://api.spoonacular.com/recipes/search?apiKey=caced314aa254583a7713a5e8e77f883&query=" + param + "&number=5"
 	response = requests.request("GET", url)
 	data = response.json()
@@ -70,7 +72,6 @@ def favorites_view(request, recipe_id):
 	return render(request, "favorites.html", {'data': data})
 
 def similar(request, recipe_id):
-	
 	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/similar?apiKey=caced314aa254583a7713a5e8e77f883&number=5"
 	response = requests.request("GET", url)
 	data = response.json()
@@ -78,3 +79,18 @@ def similar(request, recipe_id):
 		'data' : data
 	}
 	return render(request, "similar.html", context)
+
+def create_list(request):
+	if request.method == 'POST':
+		name = request.POST['list_name']
+		new_list = user_lists.objects.create(list_name=name, list_owner=request.user)
+		new_list.save()
+	return render(request, "create_list.html")
+
+def view_lists(request):
+	lists = user_lists.objects.all().filter(list_owner=request.user)
+	print(lists)
+	context = {
+		'data' : lists
+	}
+	return render(request, "user_lists.html", context)
