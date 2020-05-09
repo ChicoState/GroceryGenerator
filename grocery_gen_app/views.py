@@ -54,13 +54,6 @@ def recipe_view(request, recipe_id):
 
 	response = requests.request("GET", url)
 	data = response.json()
-	print(data["extendedIngredients"][1])
-	for item in data["extendedIngredients"]:
-		temp = str(float(item["amount"])).rstrip('0').rstrip('.')
-		print(temp)
-		item["urlSafeAmount"] = quote(temp)
-		item["urlSafeName"] = quote(item["original"])
-		print(item["urlSafeName"])
 	context = {
 		'data': data,
 		'lists': lists
