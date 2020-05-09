@@ -5,9 +5,10 @@ python:
 services:
   - docker
 
-before_script: docker-compose up -d
+before_script: pip install docker-compose
 
 script:
+  - docker-compose up -d
   - docker exec -it grocerygenerator_web_1 bash -c "coverage run manage.py test"
 after_success:
-  - docker-compose exec grocerygenerator_web_1 bash -c "coverage run manage.py test && TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_BRANCH=$TRAVIS_BRANCH COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls"
+  - docker-compose run grocerygenerator_web_1 bash -c "coverage run manage.py test && TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_BRANCH=$TRAVIS_BRANCH COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls"
