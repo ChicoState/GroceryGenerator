@@ -39,7 +39,7 @@
 		  
 		 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		 	{% for list in lists %}
-		    <a class="dropdown-item" href="/add/{{item.urlSafeAmount}}/{{item.unit}}/{{item.originalName}}/{{list.id}}/">{{list.list_name}}</a>
+		    <a class="dropdown-item" href="/add/{{data.id}}/{{item.id}}/{{list.id}}/">{{list.list_name}}</a>
 		    {% endfor %}
 		  </div>
 		</div>

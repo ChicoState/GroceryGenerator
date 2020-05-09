@@ -59,6 +59,8 @@ def recipe_view(request, recipe_id):
 		temp = str(float(item["amount"])).rstrip('0').rstrip('.')
 		print(temp)
 		item["urlSafeAmount"] = quote(temp)
+		item["urlSafeName"] = quote(item["original"])
+		print(item["urlSafeName"])
 	context = {
 		'data': data,
 		'lists': lists
@@ -112,8 +114,16 @@ def list(request, list_id):
 	}
 	return render(request, "list.html", context)
 
-def add(request, amount, unit, name, list_id):
+def add(request, recipe_id, item_id, list_id):
 	cur_list = user_lists.objects.get(id=list_id)
-	item = list_item.objects.create(item_name=name, item_amount=amount, item_unit=unit, item_list=cur_list)
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
+	response = requests.request("GET", url)
+	data = response.json()
+	for item in data["extendedIngredients"]:
+		if item["id"] == item_id: 
+			amount = item["amount"]
+			item_name = item["originalName"]
+			unit = item["unit"]
+	item = list_item.objects.create(item_name=item_name, item_amount=amount, item_unit=unit, item_list=cur_list)
 	item.save()
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/lists/')
