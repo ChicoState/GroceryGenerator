@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 import requests
 from urllib.parse import quote
+from .models import user_lists
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -78,3 +79,18 @@ def similar(request, recipe_id):
 		'data' : data
 	}
 	return render(request, "similar.html", context)
+
+def create_list(request):
+	if request.method == 'POST':
+		name = request.POST['list_name']
+		new_list = user_lists.objects.create(list_name=name, list_owner=request.user)
+		new_list.save()
+	return render(request, "create_list.html")
+
+def view_lists(request):
+	lists = user_lists.objects.all().filter(list_owner=request.user)
+	print(lists)
+	context = {
+		'data' : lists
+	}
+	return render(request, "user_lists.html", context)
