@@ -51,8 +51,8 @@
 				      <div class="modal-footer">
 				        
 				        <a class="btn btn-dark" href="recipe/{{recipe.id}}/">View Full Recipe</a>
-				        <form action="favorites/add/{{recipe.id}}" method="POST">
-						  <input class="btn btn-dark" type="submit" value="Add to Favorites">
+				        <form action="favorites/{{recipe.id}}">
+						  <input class="btn btn-dark" href="favorites/{{recipe.id}}/"type="submit" value="Add to Favorites">
 						</form>
 				      </div>
 				    </div>
