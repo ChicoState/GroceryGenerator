@@ -9,6 +9,6 @@ class user_lists(models.Model):
 
 class list_item(models.Model):
 	item_name = models.CharField(max_length=100)
-	item_id = models.IntegerField()
-	item_amount = models.FloatField()
+	item_amount = models.FloatField(default='0.0')
+	item_unit = models.CharField(max_length=20, default=" ")
 	item_list = models.ForeignKey(user_lists, on_delete=models.CASCADE)

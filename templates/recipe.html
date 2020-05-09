@@ -29,9 +29,23 @@
 <div>Serves {{data.servings}} people</div>
 <div>Total time: {{data.readyInMinutes}} minutes</div>
 <br>
+<ul style="list-style-type: none"> 
 {% for item in data.extendedIngredients %}
-	<li>{{item.original}}</li>
+	<li class="mt-1" style="left: 0px">
+		<div class="dropdown">
+		  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    {{item.original}}
+		  </button>
+		  
+		 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		 	{% for list in lists %}
+		    <a class="dropdown-item" href="/add/{{item.urlSafeAmount}}/{{item.unit}}/{{item.originalName}}/{{list.id}}/">{{list.list_name}}</a>
+		    {% endfor %}
+		  </div>
+		</div>
+	</li>
 {% endfor %}
+</ul>
 <br>
 <h3>Instructions:</h3>
 <div>{{data.instructions}}</div>

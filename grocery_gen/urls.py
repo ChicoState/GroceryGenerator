@@ -30,5 +30,6 @@ urlpatterns = [
     path('lists/', view_lists, name='lists'),
     path('create_list/', create_list, name='create_list'),
     path('list/<int:list_id>/', list, name='list'),
+    path('add/<slug:amount>/<slug:unit>/<slug:name>/<int:list_id>/', add, name='add'),
 
 ]
