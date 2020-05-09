@@ -5,7 +5,6 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 import requests
 from urllib.parse import quote
-from .forms import searchForm
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
