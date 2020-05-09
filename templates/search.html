@@ -12,7 +12,7 @@
         </div>
         <div class="col-6">    
             {% for item in data.results %}
-            	<h1>{{item.title}}</h1>
+            	<h1><a href="/recipe/{{item.id}}/">{{item.title}}</a></h1>
             {% endfor %}
         </div>
         <div class="col-3">
