@@ -21,9 +21,10 @@
 <div id="page">
 <div id="recipePage">
 <h2>{{data.title}}</h2>
-<img id="recipeImage" src="{{data.image}}">
-<a class="btn btn-dark" href="#">Add to Favorites</a>
-<br></br>
+<img src="{{data.image}}" style="float:right">
+<a class="btn btn-dark" href="/favorites/{{data.id}}">Add to Favorites</a>
+
+  <br></br>
 
 <div>Serves {{data.servings}} people</div>
 <div>Total time: {{data.readyInMinutes}} minutes</div>
