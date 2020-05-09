@@ -27,4 +27,6 @@ urlpatterns = [
     path('favorites/<int:recipe_id>/', favorites_view, name='favorites'),
     path('favorites/', favorites_view, name='favorites'),
     path('similar/<int:recipe_id>/', similar, name='similar'),
+    path('lists/', view_lists, name='lists'),
+    path('create_list/', create_list, name='create_list'),
 ]
