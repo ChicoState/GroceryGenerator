@@ -5,7 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 import requests
 from urllib.parse import quote
-from .models import user_lists
+from .models import user_lists, list_item
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -94,3 +94,10 @@ def view_lists(request):
 		'data' : lists
 	}
 	return render(request, "user_lists.html", context)
+
+def list(request, list_id):
+	list_items = list_item.objects.all().filter(item_list=list_id)
+	context = {
+		'data' : list_items
+	}
+	return render(request, "list.html", context)
