@@ -69,3 +69,12 @@ def favorites_view(request, recipe_id):
 
 	return render(request, "favorites.html", {'data': data})
 
+def similar(request, recipe_id):
+	
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/similar?apiKey=caced314aa254583a7713a5e8e77f883&number=5"
+	response = requests.request("GET", url)
+	data = response.json()
+	context = {
+		'data' : data
+	}
+	return render(request, "similar.html", context)

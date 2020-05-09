@@ -26,4 +26,5 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('favorites/<int:recipe_id>/', favorites_view, name='favorites'),
     path('favorites/', favorites_view, name='favorites'),
+    path('similar/<int:recipe_id>/', similar, name='similar'),
 ]

@@ -1,20 +1,21 @@
 <!-- templates/index.html -->
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Recipe to Grocery List{% endblock %}
+{% block title %}EasyEats{% endblock %}
 
 
 {% block content %}
-{% include "nav.html" %}
+
     <div id="banner" class="jumbotron text-center text-light">
-		<h1>Recipe to Grocery List</h1>
+		<h1 id="jumboHeader">EasyEats</h1>
 		{% if user.is_authenticated %}
       		<h2>Welcome {{ user.get_username }}</h2>
       	{% else %}
       		<a class="btn btn-dark" href="accounts/register/">Register</a>
       	{% endif %}
 	</div>
-	
+{% include "nav.html" %}
+
 <div class="container-fluid">
 	<div>
 		<div class="card-columns">
@@ -48,7 +49,7 @@
 				        {% endif %}
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        
 				        <a class="btn btn-dark" href="recipe/{{recipe.id}}/">View Full Recipe</a>
 				        <form action="favorites/{{recipe.id}}">
 						  <input class="btn btn-dark" href="favorites/{{recipe.id}}/"type="submit" value="Add to Favorites">
