@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.views.decorators.http import require_http_methods
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import requests
 from urllib.parse import quote
-from .models import user_lists
+from .models import user_lists, list_item
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -50,11 +50,16 @@ def search(request):
 def recipe_view(request, recipe_id):
 	
 	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
-	
+	lists = user_lists.objects.all().filter(list_owner=request.user)
+
 	response = requests.request("GET", url)
 	data = response.json()
+	context = {
+		'data': data,
+		'lists': lists
+	}
 
-	return render(request, "recipe.html", {'data': data})
+	return render(request, "recipe.html", context)
 
 
 
@@ -94,3 +99,24 @@ def view_lists(request):
 		'data' : lists
 	}
 	return render(request, "user_lists.html", context)
+
+def list(request, list_id):
+	list_items = list_item.objects.all().filter(item_list=list_id)
+	context = {
+		'data' : list_items
+	}
+	return render(request, "list.html", context)
+
+def add(request, recipe_id, item_id, list_id):
+	cur_list = user_lists.objects.get(id=list_id)
+	url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
+	response = requests.request("GET", url)
+	data = response.json()
+	for item in data["extendedIngredients"]:
+		if item["id"] == item_id: 
+			amount = item["amount"]
+			item_name = item["originalName"]
+			unit = item["unit"]
+	item = list_item.objects.create(item_name=item_name, item_amount=amount, item_unit=unit, item_list=cur_list)
+	item.save()
+	return HttpResponseRedirect('/lists/')
