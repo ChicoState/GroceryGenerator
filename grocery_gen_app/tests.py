@@ -15,11 +15,10 @@ class userTests(TestCase):
 		self.user = User.objects.create(username='testAccout', email='mail@mail.com', password='password123')
 
 	def test_createList(self):
-		 # Create an instance of a POST request and prepart data to send
+		 # Create an instance of a POST request and prepare data to send
 		data = {'list_name':'test_list'}
 		request = self.factory.post('/create_list/', data)
 
-		# Recall that middleware are not supported. You can simulate a
 		# logged-in user by setting request.user manually.
 		request.user = self.user
 
@@ -44,7 +43,7 @@ class search_test(TestCase):
 		self.factory = RequestFactory()
 
 	def test_search(self):
-		 # Create an instance of a POST request and prepart data to send
+		 # Create an instance of a POST request and prepare data to send
 		data = {'term':'tofu'}
 		request = self.factory.post('/search/', data)
 
