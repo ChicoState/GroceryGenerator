@@ -29,3 +29,26 @@ class userTests(TestCase):
 
 		self.assertEqual(response.status_code, 200)
 		self.assertEqual('test_list', confirm_list.list_name)
+
+class homeTest(TestCase):
+	def setUp(self):
+		self.factory = RequestFactory()
+
+	def test_home(self):
+		request = self.factory.get('/')
+		response = home_view(request)
+		self.assertEqual(response.status_code, 200)
+
+class search_test(TestCase):
+	def setUp(self):
+		self.factory = RequestFactory()
+
+	def test_search(self):
+		 # Create an instance of a POST request and prepart data to send
+		data = {'term':'tofu'}
+		request = self.factory.post('/search/', data)
+
+		# Test search() as if it were deployed at
+		response = search(request)
+	
+		self.assertEqual(response.status_code, 200)
