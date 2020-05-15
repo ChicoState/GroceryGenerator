@@ -68,12 +68,8 @@ def recipe_view(request, recipe_id):
 
 
 def favorites_view(request, recipe_id):
-    """view to see favorites"""
-    # pylint: disable=line-too-long
-    url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?apiKey=caced314aa254583a7713a5e8e77f883"
-    response = requests.request("GET", url)
-    data = response.json()
-    return render(request, "favorites.html", {'data': data})
+    """view to see favorites. currently does nothing"""
+    return render(request, "favorites.html")
 
 def similar(request, recipe_id):
     """view for similar recipes"""

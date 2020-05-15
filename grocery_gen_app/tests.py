@@ -55,7 +55,26 @@ class search_test(TestCase):
 class test_recipe_view(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
+
     def recipe_view_test(self):
-        request = self.factory.get('/recipe/')
-        response = home_view(request)
+        request = self.factory.get('/recipe/376726/')
+        response = recipe_view(request)
+        self.assertEqual(response.status_code, 200)
+
+class test_favorites_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def try_favorites_view(self):
+        request = self.factory.get('/favorites/')
+        response = favorites_view(request)
+        self.assertEqual(response.status_code, 200)
+
+class test_similar_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def similar_view_test(self):
+        request = self.factory.get('/favorites/')
+        response = similar(request)
         self.assertEqual(response.status_code, 200)
