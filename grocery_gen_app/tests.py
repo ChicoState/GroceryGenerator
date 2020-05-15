@@ -51,3 +51,11 @@ class search_test(TestCase):
 		response = search(request)
 	
 		self.assertEqual(response.status_code, 200)
+
+class test_recipe_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+    def recipe_view_test(self):
+        request = self.factory.get('/recipe/')
+        response = home_view(request)
+        self.assertEqual(response.status_code, 200)

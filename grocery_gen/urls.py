@@ -29,7 +29,6 @@ urlpatterns = [
     path('similar/<int:recipe_id>/', similar, name='similar'),
     path('lists/', view_lists, name='lists'),
     path('create_list/', create_list, name='create_list'),
-    path('list/<int:list_id>/', list, name='list'),
+    path('list/<int:list_id>/', list_view, name='list_view'),
     path('add/<int:recipe_id>/<int:item_id>/<int:list_id>/', add, name='add'),
-
 ]
