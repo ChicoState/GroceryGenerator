@@ -15,11 +15,10 @@ class userTests(TestCase):
 		self.user = User.objects.create(username='testAccout', email='mail@mail.com', password='password123')
 
 	def test_createList(self):
-		 # Create an instance of a POST request and prepart data to send
+		 # Create an instance of a POST request and prepare data to send
 		data = {'list_name':'test_list'}
 		request = self.factory.post('/create_list/', data)
 
-		# Recall that middleware are not supported. You can simulate a
 		# logged-in user by setting request.user manually.
 		request.user = self.user
 
@@ -44,7 +43,7 @@ class search_test(TestCase):
 		self.factory = RequestFactory()
 
 	def test_search(self):
-		 # Create an instance of a POST request and prepart data to send
+		 # Create an instance of a POST request and prepare data to send
 		data = {'term':'tofu'}
 		request = self.factory.post('/search/', data)
 
@@ -52,3 +51,30 @@ class search_test(TestCase):
 		response = search(request)
 	
 		self.assertEqual(response.status_code, 200)
+
+class test_recipe_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def recipe_view_test(self):
+        request = self.factory.get('/recipe/376726/')
+        response = recipe_view(request)
+        self.assertEqual(response.status_code, 200)
+
+class test_favorites_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def try_favorites_view(self):
+        request = self.factory.get('/favorites/')
+        response = favorites_view(request)
+        self.assertEqual(response.status_code, 200)
+
+class test_similar_view(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def similar_view_test(self):
+        request = self.factory.get('/favorites/')
+        response = similar(request)
+        self.assertEqual(response.status_code, 200)
